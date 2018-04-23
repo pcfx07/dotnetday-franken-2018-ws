@@ -3,7 +3,7 @@
 ## Speaker
 
 * Pawel Gerr | pawel.gerr@thinktecture.com | [@PawelGerr](https://twitter.com/PawelGerr)
-* Thorsten Hans | thorsten.hans@thinktecture.com | [@ThorstenHans]((https://twitter.com/ThorstenHans)
+* Thorsten Hans | thorsten.hans@thinktecture.com | [@ThorstenHans](https://twitter.com/ThorstenHans)
 
 ## Requirements
 
