@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -25,6 +27,11 @@ namespace DdfApi.Controllers
       [HttpGet("next")]
       public int Next()
       {
+          var aiClient = new TelemetryClient();
+          aiClient.TrackEvent("next-invoked", new Dictionary<string, string>
+          {
+              {"user", "thorsten"}
+          });
           _logger.LogTrace("Next API invoked");
          return new Random().Next();
       }
