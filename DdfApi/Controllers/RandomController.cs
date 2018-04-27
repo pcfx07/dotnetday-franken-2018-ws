@@ -6,10 +6,14 @@ namespace DdfApi.Controllers
    [Route("api/[controller]")]
    public class RandomController : Controller
    {
+      /// <summary>
+      /// Gets a random number.
+      /// </summary>
+      /// <returns>A random number.</returns>
       [HttpGet("next")]
       public int Next()
       {
-         return 42;
+         return new Random().Next();
       }
 
       [HttpGet("throw")]
