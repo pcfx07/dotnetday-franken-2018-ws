@@ -8,46 +8,37 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace DdfApi
 {
-   public class Startup
+    public class Startup
     {
-       private readonly IHostingEnvironment _environment;
+        private readonly IHostingEnvironment _environment;
 
-       public Startup(IHostingEnvironment environment)
-       {
-          _environment = environment ?? throw new ArgumentNullException(nameof(environment));
-       }
+        public Startup(IHostingEnvironment environment)
+        {
+            _environment = environment ?? throw new ArgumentNullException(nameof(environment));
+        }
 
-       public void ConfigureServices(IServiceCollection services)
-       {
-          services.AddLogging(loggingBuilder =>
-                              {
-                                 loggingBuilder.AddConsole();
-                              });
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddLogging(loggingBuilder => { loggingBuilder.AddConsole(); }); 
+            services.AddMvc(options => { options.Filters.Add<ExceptionFilter>(); });
 
-          services.AddMvc(options =>
-                          {
-                             options.Filters.Add<ExceptionFilter>();
-                          });
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("ddf-api", new Info()
+                {
+                    Title = "DDF Demo",
+                    Version = "v1"
+                });
+                options.IncludeXmlComments("DdfApi.xml");
+            });
+        }
 
-          services.AddSwaggerGen(options =>
-                                 {
-                                    options.SwaggerDoc("ddf-api", new Info()
-                                                                  {
-                                                                     Title = "DDF Demo",
-                                                                     Version = "v1"
-                                                                  });
-                                    options.IncludeXmlComments("DdfApi.xml");
-                                 });
-       }
-
-       public void Configure(IApplicationBuilder app)
-       {
-          app.UseMvc();
-          app.UseSwagger();
-          app.UseSwaggerUI(options =>
-                           {
-                              options.SwaggerEndpoint("/swagger/ddf-api/swagger.json", "DDF Demo");
-                           });
-       }
+        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        {
+             
+            app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/ddf-api/swagger.json", "DDF Demo"); });
+        }
     }
 }
