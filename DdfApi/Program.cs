@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
 
 namespace DdfApi
@@ -7,6 +9,9 @@ namespace DdfApi
    {
       static void Main(string[] args)
       {
+         var ddlPath = typeof(Program).GetTypeInfo().Assembly.Location;
+         Environment.CurrentDirectory = Path.GetDirectoryName(ddlPath);
+
          var webhost = new WebHostBuilder()
                        .UseKestrel()
                        .UseStartup<Startup>()

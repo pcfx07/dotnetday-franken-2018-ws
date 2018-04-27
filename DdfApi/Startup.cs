@@ -36,6 +36,7 @@ namespace DdfApi
                                                                      Title = "DDF Demo",
                                                                      Version = "v1"
                                                                   });
+                                    options.IncludeXmlComments("DdfApi.xml");
                                  });
        }
 

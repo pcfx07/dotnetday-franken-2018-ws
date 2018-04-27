@@ -10,6 +10,7 @@ namespace DdfApi.Controllers
       /// Gets a random number.
       /// </summary>
       /// <returns>A random number.</returns>
+      /// <response code="200">Generation of a random number secceeded.</response>
       [HttpGet("next")]
       public int Next()
       {
